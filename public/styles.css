@@ -1,0 +1,116 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.img-carousel {
+    height: 230px !important;
+    margin: auto !important;
+}
+.item {
+    background-color: #000 !important;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 1000px;}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+input {
+    margin: 10px;
+}
+.allbut {
+    margin: 5px;
+}
+.social {
+    margin: 10px;
+}
+
+.subTech {
+    float: right;
+    margin-right: 37px;
+}
+.missy {
+    float: left !important;
+    height: 100px;
+    width: 25%;
+    margin-bottom: 120px;
+    margin-left: 70px !important;
+}
+.snow {
+    height: 100px;
+    width: 91%;
+}
+.selina {
+    float: left !important;
+    height: 100px;
+    width: 33%;
+    margin-left: -30px;
+}
+.sideImg {
+    width: 185px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.topBtn {
+    margin-right: 5px;
+}
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+.allWoman {
+    margin-bottom: 10px;
+}
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;}
+}
+.xbut {
+    background: #ab0010 !important;
+}
+.editbut {
+    background: #000 !important;
+}
+.savebut {
+    background: #f8f2d8 !important;
+    color: #000 !important;
+}
+.sidebtn {
+    font-size: 13px;
+    margin-left: -9px;
+}
+.regBtn {
+    width: 150px;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+.homeImage {
+    height: 100px;
+}
+.btns {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.aboutFoot {
+    margin: 50px 0;
+}
+.col-sm-8 {
+    text-align: center;
+}
+.selectBox {
+    margin: 20px;
+    padding: 20px;
+}

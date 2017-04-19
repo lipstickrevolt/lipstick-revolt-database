@@ -1,0 +1,109 @@
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-9 text-left">
+            <h1>Women in Music</h1>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Subcategories:</h3>
+                    <button ng-click="subcategory='Producer' " class="btn topBtn">Producer</button>
+                    <button ng-click="subcategory='Rapper' " class="btn topBtn">Rapper</button>
+                    <button ng-click="subcategory='Singer' " class="btn topBtn">Singer</button>
+                    <button ng-click="subcategory='Musician' " class="btn topBtn">Musician</button>
+                    <button ng-click="subcategory='Song Writer' " class="btn topBtn">Song Writer</button>
+                    <button ng-click="subcategory='Other' " class="btn topBtn">Other</button>
+                    <button ng-click="subcategory='' || undefined" class="btn topBtn">All</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row allWoman">
+                <div class="col-md-4"
+                     ng-repeat="woman in allWomen | filter:{ category: 'Music', subcategoryMus: subcategory}">
+
+                    <div>{{woman.name}}</div>
+                    <div>{{woman.category}}</div>
+                    <div>{{woman.subcategoryMus}}</div>
+                    <div>{{woman.occupation}}</div>
+                    <div>{{woman.bio}}</div>
+                    <div ng-repeat="social in woman.socialMedia">
+                        <span>{{social}}</span>
+                    </div>
+                    <div>{{woman.contact}}</div>
+                    <img src="{{woman.imgUrl}}">
+                    <div>
+                        <button class="bttn-jelly bttn-md bttn-primary xbut" ng-click="deleteWomen(woman, $index)">x</button>
+                        <button class="bttn-jelly bttn-md bttn-primary editbut" ng-click="woman.womanEditBox = !woman.womanEditBox">edit</button>
+                        <button class="bttn-jelly bttn-md bttn-primary savebut" ng-show="woman.womanEditBox" ng-click="saveWomanEdit(woman)">save edits</button>
+                    </div>
+                    <div ng-show="woman.womanEditBox" id="{{woman._id}}">
+                        <div>Name: <input ng-model="woman.name" placeholder="{{woman.name}}"></div>
+                        <div>Subcategory: <input ng-model="woman.subcategoryMus" placeholder="{{woman.subcategoryMus}}"></div>
+                        <div>Category: <input ng-model="woman.category" placeholder="{{woman.category}}"></div>
+                        <div>Company: <input ng-model="woman.company" placeholder="{{woman.company}}"></div>
+                        <div>ImgUrl: <input ng-model="woman.imgUrl" placeholder="{{woman.imgUrl}}"></div>
+                        <div>Bio: <input ng-model="woman.bio" placeholder="{{woman.bio}}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 sidenav">
+            <div class="well">
+                <button type="button" class="btn btn-info btn-lg sidebtn" data-toggle="modal" data-target="#myModal">
+                    Submit a Woman in Music
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Submit Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input ng-model="newWoman.name" placeholder="Name">
+                                <div class="selectBox">
+
+                                    <label for="category">I am...</label>
+                                    <select name="category" ng-model="newWoman.subcategoryMus">
+                                        <option value="" disabled selected>--Please Select--</option>
+                                        <option value="Producer">Producer</option>
+                                        <option value="Rapper">Rapper</option>
+                                        <option value="Singer">Singer</option>
+                                        <option value="Musician">Musician</option>
+                                        <option value="Song Writer">Song Writer</option>
+                                        <option value="None of the above">None of the above</option>
+                                    </select>
+                                </div>
+                                <input ng-model="newWoman.occupation" placeholder="Occupation">
+
+                                <input ng-model="newWoman.bio" placeholder="Biogrophy">
+                                <input ng-model="newWoman.socialMedia" placeholder="Social Media">
+                                <input ng-model="newWoman.contact" placeholder="Contact">
+                                <input ng-model="newWoman.imgUrl" placeholder="imgUrl">
+                                <button ng-click="submitWoman(newWoman)">Submit</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <button ng-click="register(newUser)" class="bttn-unite bttn-lg bttn-primary regBtn">Register</button>
+            </div>
+            <div class="well">
+                <a href="#/music">
+                    <button class="btns bttn-fill bttn-md bttn-primary" ng-click="music()">Music</button>
+                </a>
+                <a href="#/tech">
+                    <button class="btns bttn-fill bttn-md bttn-primary" ng-click="tech()">Technology</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
