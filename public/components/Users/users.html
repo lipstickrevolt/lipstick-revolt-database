@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Lipstick Revolt Users:</h1>
+    <hr>
+<div ng-repeat="user in users">
+    {{user.name}}
+    {{user.username}}
+    {{user.category}}
+    <button ng-show="currentUser.admin" ng-click="deleteUser(user, $index)">x</button>
+    <button ng-show="currentUser.admin" ng-click="user.userEditBox = !user.userEditBox">edit</button>
+    <button ng-show ="user.userEditBox && currentUser.admin" ng-click="saveUserEdit(user)">save edits</button>
+    <div ng-show="user.userEditBox" id="{{user._id}}">
+        <input ng-model="user.name" placeholder="{{user.name}}">
+        <input ng-model="user.email" placeholder="{{user.email}}">
+        <input ng-model="user.category" placeholder="{{user.category}}">
+    </div>
+</div>
+</div>
