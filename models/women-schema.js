@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var womenSchema = new Schema ({
     name: String,
-    category: {
+    category: [{
         type: String,
-        enum: ["Music", "Tech", "Both"]
-    },
+        enum: ["Music", "Tech"]
+    }],
     subcategoryMus: String,
     subcategoryTech: String,
     company: String,
@@ -21,7 +21,12 @@ var womenSchema = new Schema ({
         type: Number,
         default: 0},
     comments: [String],
-    imgUrl: String
+    imgUrl: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
 })
 
 var Women = mongoose.model('Women', womenSchema);

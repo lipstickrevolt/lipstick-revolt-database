@@ -1,7 +1,7 @@
 angular.module('myApp')
 
     .controller("musicController", ["$scope", "getWomen", "getUser", function($scope, getWomen, getUser){
-        getWomen.getWomen().then(function(response){
+        getWomen.getWomen("Music").then(function(response){
             $scope.allWomen = response;
         })
         $scope.submitWoman = function(newWoman){

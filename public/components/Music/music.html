@@ -21,7 +21,7 @@
                      ng-repeat="woman in allWomen | filter:{ category: 'Music', subcategoryMus: subcategory}">
 
                     <div>{{woman.name}}</div>
-                    <div>{{woman.category}}</div>
+                    <div ng-repeat="item in woman.category">{{item}}</div>
                     <div>{{woman.subcategoryMus}}</div>
                     <div>{{woman.occupation}}</div>
                     <div>{{woman.bio}}</div>
@@ -29,8 +29,8 @@
                         <span>{{social}}</span>
                     </div>
                     <div>{{woman.contact}}</div>
-                    <img src="{{woman.imgUrl}}">
-                    <div>
+                    <img class="categImage" src="{{woman.imgUrl}}">
+                    <div class="btnBox">
                         <button class="bttn-jelly bttn-md bttn-primary xbut" ng-click="deleteWomen(woman, $index)">x</button>
                         <button class="bttn-jelly bttn-md bttn-primary editbut" ng-click="woman.womanEditBox = !woman.womanEditBox">edit</button>
                         <button class="bttn-jelly bttn-md bttn-primary savebut" ng-show="woman.womanEditBox" ng-click="saveWomanEdit(woman)">save edits</button>

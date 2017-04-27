@@ -1,13 +1,17 @@
 angular.module('myApp')
 
-.controller("homeController", ["$scope", "getWomen", "getUser", "$location", function($scope, getWomen, getUser, $location){
+.controller("homeController", ["$scope", "getWomen", "getUser", "$location", "UserService", function($scope, getWomen, getUser, $location, UserService){
    getWomen.getWomen().then(function(response){
        $scope.allWomen = response;
    })
 
+   getUser.getCurrentUser().then(function (response) {
+       $scope.isAdmin = response.admin;
+   })
+
     $scope.userEditBox = false;
 
-    getUser.getUser().then(function(response){
+    getUser.getUsers().then(function(response){
        $scope.users = response;
    })
     $scope.saveWomanEdit = function(woman){

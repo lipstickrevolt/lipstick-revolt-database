@@ -2,10 +2,14 @@ angular.module('myApp')
 
     .controller("userController", ["$scope", "getWomen", "getUser", function($scope, getWomen, getUser){
 
-        getUser.getUser().then(function(response){
+        getUser.getUsers().then(function(response){
             $scope.users = response;
         })
 
+        getUser.getCurrentUser().then(function(response){
+            $scope.currentUser = response;
+
+        })
         // $scope.register = function(newUser){
         //     getUser.postUser(newUser).then(function(response){
         //         $scope.users.push(response);

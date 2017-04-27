@@ -9,7 +9,16 @@
 .item {
     background-color: #000 !important;
 }
-
+.navbar-brand img{
+    height: 35px !important;
+    margin-top: -7px;
+}
+.categImage {
+    width: 170px;
+}
+.btnBox {
+    margin: 10px;
+}
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 1000px;}
 
