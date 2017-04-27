@@ -1,29 +1,29 @@
-angular.module('myApp', ["ngRoute"])
+angular.module('myApp', ["ngRoute", "myApp.Auth"])
 
 .config(['$routeProvider', function($routeProvider){
     $routeProvider
         .when("/home", {
-            templateUrl: "Home/home.html",
+            templateUrl: "components/Home/home.html",
             controller: "homeController"
         })
         .when("/about", {
-            templateUrl: "About/about.html",
+            templateUrl: "components/About/about.html",
             controller: "aboutController"
         })
         .when("/contact", {
-            templateUrl: "Contact/contact.html",
+            templateUrl: "components/Contact/contact.html",
             controller: "contactController"
         })
         .when("/music", {
-            templateUrl: "Music/music.html",
+            templateUrl: "components/Music/music.html",
             controller: "musicController"
         })
         .when("/tech", {
-            templateUrl: "Tech/tech.html",
+            templateUrl: "components/Tech/tech.html",
             controller: "techController"
         })
         .when("/users", {
-            templateUrl: "Users/users.html",
+            templateUrl: "components/Users/users.html",
             controller: "userController"
         })
         .otherwise({

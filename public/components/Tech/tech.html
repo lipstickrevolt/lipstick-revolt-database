@@ -12,14 +12,14 @@
                     <button ng-click="subcategory='Web Development' " class="btn topBtn">Web Development</button>
                     <button ng-click="subcategory='System Analyst' " class="btn topBtn">System Analyst</button>
                     <button ng-click="subcategory='Other' " class="btn topBtn">Other</button>
-                    <button ng-click="subcategory=''" class="btn topBtn">All</button>
+                    <button ng-click="subcategory='' || undefined" class="btn topBtn">All</button>
                 </div>
             </div>
             <hr>
             <div class="row allWoman">
-                <div class="col-md-4" ng-repeat="woman in allWomen | filter:{ category: 'Tech', subcategoryTech: subcategory}">
+                <div class="col-md-4" ng-repeat="woman in allWomen | filter:{ category: 'Tech' || 'Both', subcategoryTech: subcategory}">
                     <div>{{woman.name}}</div>
-                    <div>{{woman.category}}</div>
+                    <div ng-repeat="item in woman.category">{{item}}</div>
                     <div>{{woman.subcategoryTech}}</div>
                     <div>{{woman.company}}</div>
                     <div>{{woman.bio}}</div>
@@ -27,8 +27,8 @@
                         <span>{{social}}</span>
                     </div>
                     <div>{{woman.contact}}</div>
-                    <img src="{{woman.imgUrl}}">
-                    <div>
+                    <img class="categImage" src="{{woman.imgUrl}}">
+                    <div class="btnBox">
                         <button class="bttn-jelly bttn-md bttn-primary xbut" ng-click="deleteWomen(woman, $index)">x</button>
                         <button class="bttn-jelly bttn-md bttn-primary editbut" ng-click="woman.womanEditBox = !woman.womanEditBox">edit</button>
                         <button class="bttn-jelly bttn-md bttn-primary savebut" ng-show="woman.womanEditBox" ng-click="saveWomanEdit(woman)">save edits</button>

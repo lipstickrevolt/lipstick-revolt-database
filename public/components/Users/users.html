@@ -3,11 +3,11 @@
     <hr>
 <div ng-repeat="user in users">
     {{user.name}}
-    {{user.email}}
+    {{user.username}}
     {{user.category}}
-    <button ng-click="deleteUser(user, $index)">x</button>
-    <button ng-click="user.userEditBox = !user.userEditBox">edit</button>
-    <button ng-show ="user.userEditBox" ng-click="saveUserEdit(user)">save edits</button>
+    <button ng-show="currentUser.admin" ng-click="deleteUser(user, $index)">x</button>
+    <button ng-show="currentUser.admin" ng-click="user.userEditBox = !user.userEditBox">edit</button>
+    <button ng-show ="user.userEditBox && currentUser.admin" ng-click="saveUserEdit(user)">save edits</button>
     <div ng-show="user.userEditBox" id="{{user._id}}">
         <input ng-model="user.name" placeholder="{{user.name}}">
         <input ng-model="user.email" placeholder="{{user.email}}">
