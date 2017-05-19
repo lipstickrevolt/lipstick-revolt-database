@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 var bcrypt = require("bcrypt");
 
 var userSchema = new Schema ({
-    name: String,
+    name: {
+        type: String,
+    required: true
+    },
     username: {
         type: String,
         required: true,
@@ -19,8 +22,16 @@ var userSchema = new Schema ({
         type: Boolean,
         default: false
     },
-    email: String,
-    category: String
+    email: {
+        type: String,
+        required: true
+    },
+    category: String,
+    favEvents: [{
+        type: Schema.Types.ObjectId,
+        ref: "Event"
+    }]
+
 });
 
 userSchema.pre("save", function (next) {

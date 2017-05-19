@@ -4,6 +4,9 @@ angular.module('myApp')
         getWomen.getWomen("Tech").then(function(response){
             $scope.allWomen = response;
         })
+        getUser.getCurrentUser().then(function (response) {
+            $scope.currentUser = response;
+        })
         $scope.submitWoman = function(newWoman){
             newWoman.category = "Tech";
             newWoman.socialMedia = newWoman.socialMedia.split(",");

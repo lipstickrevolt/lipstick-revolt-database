@@ -61,3 +61,45 @@ angular.module('myApp')
 
 
     }])
+    .service("getEvents", ["$http", function($http){
+        this.getEvents = function (category) {
+            var url = "api/event";
+            var confi
+            if (category){
+                url += "?category=" + category;
+            }
+            return $http.get(url).then(function (response) {
+                for(var i = 0; i < response.data.length; i++){
+                    response.data[i].date = new Date(response.data[i].date)
+                }
+
+                return response.data
+            })
+        }
+
+        this.postEvent = function (newEvent) {
+            if (newEvent.category === "Both"){
+                newEvent.category = ["Music", "Tech"];
+            }
+            return $http.post('api/event', newEvent).then(function (newEvent) {
+                return newEvent.data
+            })
+        }
+
+        this.editEvent = function (item) {
+            return $http.put('api/event/' + item._id, item).then(function (response) {
+                return response.data
+            })
+        }
+
+        this.deleteEvent = function (event) {
+            return $http.delete('api/event/' + event._id).then(function (response) {
+                return "Item deleted!"
+            })
+        }
+
+
+
+
+
+    }])

@@ -4,6 +4,7 @@ var expressJwt = require("express-jwt");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
 var womenRoute = require("./routes/women-route");
+var eventRoute = require("./routes/event-route");
 var mongoose = require("mongoose");
 var config = require("./config");
 var path = require('path');
@@ -21,6 +22,7 @@ mongoose.connect(config.database, function(err){
 });
 
 app.use("/api/lipstickRevolt", require("./routes/women-route"));
+app.use("/api/event", require("./routes/event-route"));
 app.use("/auth", require("./routes/auth-routes"));
 app.use("/users", require("./routes/user-route"));
 app.listen(port, function(){

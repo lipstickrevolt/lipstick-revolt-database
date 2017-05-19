@@ -1,12 +1,13 @@
 angular.module('myApp')
 
-.controller("homeController", ["$scope", "getWomen", "getUser", "$location", "UserService", function($scope, getWomen, getUser, $location, UserService){
-   getWomen.getWomen().then(function(response){
+.controller("homeController", ["$scope", "getWomen", "getUser", "$location", "UserService", "getEvents", function($scope, getWomen, getUser, $location, UserService, getEvents){
+   
+    getWomen.getWomen().then(function(response){
        $scope.allWomen = response;
    })
 
    getUser.getCurrentUser().then(function (response) {
-       $scope.isAdmin = response.admin;
+       $scope.currentUser = response;
    })
 
     $scope.userEditBox = false;
@@ -29,6 +30,11 @@ angular.module('myApp')
             $scope.allWomen.push(response);
         })
         $scope.newWoman = {};
+    }
+
+    $scope.submitEvent = function(newEvent){
+        getEvents.postEvent(newEvent);
+
     }
     $scope.register = function(newUser){
        getUser.postUser(newUser).then(function(response){

@@ -17,27 +17,98 @@
             </div>
             <hr>
             <div class="row allWoman">
-                <div class="col-md-4"
-                     ng-repeat="woman in allWomen | filter:{ category: 'Music', subcategoryMus: subcategory}">
+                <div class="col-md-4" ng-repeat="woman in allWomen | filter:{ category: 'Music', subcategoryMus: subcategory}">
+                    <script type="text/ng-template" id="group-template.html">
+                        <div class="panel-heading">
+                            <h4 class="panel-title" style="color:#fa39c3">
+                                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()"
+                                   uib-accordion-transclude="heading">
+                                     <span uib-accordion-header ng-class="{'text-muted': isDisabled}">{{heading}}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-collapse collapse" uib-collapse="!isOpen">
+                            <div class="panel-body" style="text-align: right" ng-transclude></div>
+                        </div>
+                    </script>
 
-                    <div>{{woman.name}}</div>
-                    <div ng-repeat="item in woman.category">{{item}}</div>
-                    <div>{{woman.subcategoryMus}}</div>
-                    <div>{{woman.occupation}}</div>
-                    <div>{{woman.bio}}</div>
-                    <div ng-repeat="social in woman.socialMedia">
-                        <span>{{social}}</span>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" ng-click="status.open = !status.open">
+                            Toggle last panel
+                        </button>
+                    </p>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="oneAtATime">
+                            Open only one at a time
+                        </label>
                     </div>
-                    <div>{{woman.contact}}</div>
+
                     <img class="categImage" src="{{woman.imgUrl}}">
+                    <div class="col-xs-3 col-md-3 col-lg-3 likes">
+                        <button class="btn clicker" ng-click="like(woman)"><span
+                                class="glyphicon glyphicon-thumbs-up"
+                                aria-hidden="true"></span>
+                        </button>
+                        Likes: <span class="reg">{{woman.like}}</span>
+                    </div>
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="panel-default" heading="{{woman.name}}">
+                            {{woman.bio}}
+                        </div>
+                        <div uib-accordion-group class="panel-default" heading="{{woman.subcategoryMus}}">
+                            <p>The body of the uib-accordion group grows to fit the contents</p>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                            <div ng-repeat="item in items">{{item}}</div>
+                        </div>
+                        <div uib-accordion-group class="panel-default" ng-repeat="social in woman.socialMedia" heading="Social Media"
+                             template-url="group-template.html">
+                            <span>{{social}}</span>
+                        </div>
+                        <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen"
+                             template-url="group-template.html">
+                            <uib-accordion-heading>
+                                Custom template with custom header template <i class="pull-right glyphicon"
+                                                                               ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+                            </uib-accordion-heading>
+                            World
+                        </div>
+                        <div uib-accordion-group class="panel-default" is-open="status.open">
+                            <uib-accordion-heading>
+                                I can have markup, too! <i class="pull-right glyphicon"
+                                                           ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                            </uib-accordion-heading>
+                            This is just some content to illustrate fancy headings.
+                        </div>
+                    </uib-accordion>
+                    <!--<div>{{woman.name}}</div>-->
+                    <!--<div ng-repeat="item in woman.category">{{item}}</div>-->
+                    <!--<div>{{woman.subcategoryMus}}</div>-->
+                    <div>{{woman.occupation}}</div>
+                    <!--<div>{{woman.bio}}</div>-->
+                    <!--<div ng-repeat="social in woman.socialMedia">-->
+                        <!--<span>{{social}}</span>-->
+                    <!--</div>-->
+                    <div>{{woman.contact}}</div>
+                    <!--<img class="categImage" src="{{woman.imgUrl}}">-->
+
                     <div class="btnBox">
-                        <button class="bttn-jelly bttn-md bttn-primary xbut" ng-click="deleteWomen(woman, $index)">x</button>
-                        <button class="bttn-jelly bttn-md bttn-primary editbut" ng-click="woman.womanEditBox = !woman.womanEditBox">edit</button>
-                        <button class="bttn-jelly bttn-md bttn-primary savebut" ng-show="woman.womanEditBox" ng-click="saveWomanEdit(woman)">save edits</button>
+                        <button ng-show="currentUser.admin" class="bttn-jelly bttn-md bttn-primary xbut"
+                                ng-click="deleteWomen(woman, $index)">x
+                        </button>
+                        <button ng-show="currentUser.admin" class="bttn-jelly bttn-md bttn-primary editbut"
+                                ng-click="woman.womanEditBox = !woman.womanEditBox">edit
+                        </button>
+                        <button class="bttn-jelly bttn-md bttn-primary savebut"
+                                ng-show="woman.womanEditBox && currentUser.admin" ng-click="saveWomanEdit(woman)">save
+                            edits
+                        </button>
                     </div>
                     <div ng-show="woman.womanEditBox" id="{{woman._id}}">
                         <div>Name: <input ng-model="woman.name" placeholder="{{woman.name}}"></div>
-                        <div>Subcategory: <input ng-model="woman.subcategoryMus" placeholder="{{woman.subcategoryMus}}"></div>
+                        <div>Subcategory: <input ng-model="woman.subcategoryMus" placeholder="{{woman.subcategoryMus}}">
+                        </div>
                         <div>Category: <input ng-model="woman.category" placeholder="{{woman.category}}"></div>
                         <div>Company: <input ng-model="woman.company" placeholder="{{woman.company}}"></div>
                         <div>ImgUrl: <input ng-model="woman.imgUrl" placeholder="{{woman.imgUrl}}"></div>

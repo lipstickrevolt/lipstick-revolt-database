@@ -1,0 +1,124 @@
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-9 text-left">
+            <h1>Events</h1>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Categories:</h3>
+                    <button ng-click="category='Music' " class="btn topBtn">Music</button>
+                    <button ng-click="category='Tech' " class="btn topBtn">Tech</button>
+                    <button ng-click="category='' || undefined" class="btn topBtn">All</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row allWoman">
+                <div class="col-md-4" ng-repeat="event in events | filter:{ category: category}">
+                    <div>{{event.name}}</div>
+                    <div>{{event.date | date: 'fullDate'}}</div>
+                    <div>{{event.startTime | date: 'shortTime'}}</div>
+                    <div>{{event.endTime | date: 'shortTime'}}</div>
+                    <div ng-repeat="item in event.category">{{item}}</div>
+                    <div>{{event.description}}</div>
+                    <div>{{event.company}}</div>
+                    <div ng-repeat="social in event.socialMedia">
+                        <span>{{social}}</span>
+                    </div>
+                    <div>{{event.contact}}</div>
+                    <img class="categImage" src="{{event.imgUrl}}">
+                    <div class="btnBox">
+                        <button ng-show="currentUser.admin" class="bttn-jelly bttn-md bttn-primary xbut" ng-click="deleteEvent(event, $index)">x</button>
+                        <button ng-show="currentUser.admin" class="bttn-jelly bttn-md bttn-primary editbut" ng-click="event.eventEditBox = !event.eventEditBox">edit</button>
+                        <button class="bttn-jelly bttn-md bttn-primary savebut" ng-show="currentUser.admin && event.eventEditBox" ng-click="saveEventEdit(event)">save edits</button>
+                    </div>
+                    <div ng-show="event.eventEditBox" id="{{event._id}}">
+                        <div>Name: <input ng-model="event.name" placeholder="{{event.name}}"></div>
+                        <div>Subcategory: <input ng-model="event.subcategory" placeholder="{{event.subcategory}}"></div>
+                        <div>Category: <input ng-model="event.category" placeholder="{{event.category}}"></div>
+                        <div>Company: <input ng-model="event.company" placeholder="{{event.company}}"></div>
+                        <div>ImgUrl: <input ng-model="event.imgUrl" placeholder="{{event.imgUrl}}"></div>
+                        <div>Description: <input ng-model="event.description" placeholder="{{event.description}}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 sidenav">
+            <div class="well">
+                <button type="button" class="btn btn-info btn-lg sidebtn" data-toggle="modal" data-target="#myEventModal">
+                    Submit an Event
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myEventModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Submit an Event</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input ng-model="newEvent.name" placeholder="Name of Event">
+                                <input ng-model="newEvent.date" type="date">
+                                <input ng-model="newEvent.startTime" type="time">
+                                <input ng-model="newEvent.endTime" type="time">
+                                <input ng-model="newEvent.company" placeholder="Organizers of Event">
+
+                                <div class="selectBox">
+
+                                    <label for="category">The Category of event is</label>
+                                    <select name="category" ng-model="newEvent.category">
+                                        <option value="" disabled selected>--Please Select--</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Tech">Technology</option>
+                                        <option value="Both">both Music and Technology</option>
+                                    </select>
+
+                                    <label for="subCateg"></label>
+                                    <select ng-show="newEvent.category=='Music' || newEvent.category=='Tech' || newEvent.category=='Both'"
+                                            name="subCateg" ng-model="newEvent.subcategory">
+                                        <option value="" disabled selected>--Please Select--</option>
+                                        <option value="Networking">Networking</option>
+                                        <option value="Party">Party</option>
+                                        <option value="Workshop">Workshop</option>
+                                        <option value="Competition">Competition</option>
+                                        <option value="Seminar">Seminar</option>
+                                        <option value="Festival">Festival</option>
+                                        <option value="None of the above">None of the above</option>
+                                    </select>
+                                </div>
+                                <hr>
+
+                                <input ng-model="newEvent.description" placeholder="Description">
+                                <input ng-model="newEvent.socialMedia" placeholder="Social Media">
+                                <input ng-model="newEvent.contact" placeholder="Contact">
+                                <input ng-model="newEvent.imgUrl" placeholder="imgUrl">
+                                <button ng-click="submitEvent(newEvent)">Submit</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <button ng-click="register(newUser)" class="bttn-unite bttn-lg bttn-primary regBtn">Register</button>
+            </div>
+            <div class="well">
+                <a href="#/music">
+                    <button class="btns bttn-fill bttn-md bttn-primary" ng-click="music()">Music</button>
+                </a>
+                <a href="#/tech">
+                    <button class="btns bttn-fill bttn-md bttn-primary" ng-click="tech()">Technology</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
